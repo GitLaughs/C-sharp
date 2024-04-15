@@ -1,0 +1,12 @@
+ using System;
+
+class Program {
+    static void Main(string[] args ) {
+        // 从控制台读取一行输入
+        string input = Console.ReadLine();
+        // 使用空格分隔输入的整数
+        string[] numbers = input.Split(' ');
+        // 使用逗号连接整数，并输出
+        Console.WriteLine(String.Join(",", numbers));
+    }
+}
