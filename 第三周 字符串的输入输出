@@ -1,0 +1,14 @@
+ using System;
+
+class HelloWorld {
+    static void Main(string[] args ) {
+        // 提示用户输入
+        // Console.Write("请输入一个字符串s: ");
+        //Console.WriteLine("你好-{Console.ReadLine()}");
+	//	Console.Write("请输入一个字符串s: ");
+        string s = Console.ReadLine();
+
+        // 输出
+        Console.WriteLine("你好-{s}");
+    }
+}
