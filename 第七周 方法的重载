@@ -1,0 +1,50 @@
+
+using System;
+using System.Linq;
+namespace goodok
+{
+    internal class Program
+    {
+        public class Average
+        {
+            public int[] gra;
+            public string[] sgra;
+            public double AvgGrade(ref int[] gra)
+            {
+                double avg = gra.Average();
+                return avg;
+            }
+            public double AvgGrade(ref string[] sgra)
+            {
+                double sum = 0;
+                foreach (string i in sgra)
+                {
+                    if (i == "good")
+                    {
+                        sum = sum + 4;
+                    }
+                    else { sum = sum + 1; }
+                }
+                return sum / sgra.Length;
+            }
+        }
+        static void Main(string[] args)
+        {
+            string s = Console.ReadLine();
+            string[] ss = s.Split(' ');
+            Average av = new Average();
+            if (ss[0] != "good" && ss[0] != "ok")
+            {
+                int[] sss = Array.ConvertAll(ss, int.Parse);
+                av.gra = sss;
+                Console.WriteLine("{0:f1}", av.AvgGrade(ref av.gra));
+            }
+            else
+            {
+                av.sgra = ss;
+                Console.WriteLine("{0:f1}", av.AvgGrade(ref av.sgra));
+            }
+        }
+    }
+}
+ 
