@@ -1,0 +1,55 @@
+ using System;
+
+public class Vehicle
+{
+    public int Wheels { get; private set; }
+    public int Weight { get; private set; }
+
+    public Vehicle(int wheels, int weight)
+    {
+        Wheels = wheels;
+        Weight = weight;
+    }
+
+    public virtual void Run()
+    {
+        Console.WriteLine("running");
+    }
+}
+
+public class Car : Vehicle
+{
+    public int PassengerLoad { get; private set; }
+
+    public Car(int wheels, int weight, int passengerLoad) : base(wheels, weight)
+    {
+        PassengerLoad = passengerLoad;
+    }
+
+    public override void Run()
+    {
+        Console.WriteLine("Car is running");
+    }
+
+    public override string ToString()
+    {
+        return string.Format("wheels:{0};weight:{1};passenger:{2}", Wheels, Weight, PassengerLoad);
+    }
+
+}
+
+class iloveyou
+{
+    static void Main(string[] args)
+    {
+        string[] inputs = Console.ReadLine().Split(' ');
+        int wheels = int.Parse(inputs[0]);
+        int weight = int.Parse(inputs[1]);
+        int passengerLoad = int.Parse(inputs[2]);
+
+        Car car = new Car(wheels, weight, passengerLoad);
+
+        car.Run();
+        Console.WriteLine(car.ToString());
+    }
+}
