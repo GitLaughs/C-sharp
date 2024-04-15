@@ -1,0 +1,44 @@
+ using System;
+
+public class Student
+{
+    public string StudentId { get; set; }
+    public int[] Scores { get; set; }
+
+    // 构造方法
+    public Student(string id, int[] scores)
+    {
+        StudentId = id;
+        Scores = scores;
+    }
+
+    // 输出成绩的方法
+    public void PrintScores()
+    {
+        Array.Sort(Scores); // 将成绩由小到大排序
+        Console.Write("{0}", StudentId);
+        foreach (int score in Scores)
+        {
+            Console.Write(" {0}", score);
+        }
+        Console.WriteLine();
+    }
+}
+
+class Program123
+{
+    static void Main()
+    {
+        string id1 = Console.ReadLine();
+        int[] scores1 = Array.ConvertAll(Console.ReadLine().Split(' '), int.Parse);
+
+        string id2 = Console.ReadLine();
+        int[] scores2 = Array.ConvertAll(Console.ReadLine().Split(' '), int.Parse);
+
+        Student student1 = new Student(id1, scores1);
+        Student student2 = new Student(id2, scores2);
+
+        student1.PrintScores();
+        student2.PrintScores();
+    }
+}
