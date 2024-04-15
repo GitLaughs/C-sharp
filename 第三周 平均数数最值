@@ -1,0 +1,20 @@
+ using System;
+
+class AverageCalculator
+{
+    static void Main(string[] args)
+    {
+        string input = Console.ReadLine();
+        string[] numbers = input.Split(' ');
+        double sum = 0;
+        int count = numbers.Length;
+
+        foreach (string number in numbers)
+        {
+            sum += Convert.ToDouble(number);
+        }
+
+        double average = sum / count;
+        Console.WriteLine("{0}",average);
+    }
+}
