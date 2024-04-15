@@ -1,0 +1,58 @@
+using System;
+
+public class HeartRates
+{
+    // 字段
+    public string name; // 将字段设置为公共以便在Program类中直接访问
+    private int birthYear;
+
+    // 构造函数
+    public HeartRates(string name, int birthYear)
+    {
+        this.name = name;
+        this.birthYear = birthYear;
+    }
+
+    // 属性
+    public int Age
+    {
+        get
+        {
+            return DateTime.Now.Year - birthYear;
+        }
+    }
+
+    // 方法
+    public int MaxHeartRate()
+    {
+        return 220 - Age;
+    }
+
+    public int MinTargetHeartRate()
+    {
+        return (int)(MaxHeartRate() * 0.50);
+    }
+
+    public int MaxTargetHeartRate()
+    {
+        return (int)(MaxHeartRate() * 0.85);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+
+        string input = Console.ReadLine();
+        string[] parts = input.Split(' ');
+
+        string name = parts[0];
+        int birthYear = Convert.ToInt32(parts[1]);
+
+        HeartRates person = new HeartRates(name, birthYear);
+        // 使用格式化字符串输出
+        Console.WriteLine("{0} {1}岁 最高心率{2} 最低目标心率{3} 最高目标心率{4}", 
+            person.name, person.Age, person.MaxHeartRate(), person.MinTargetHeartRate(), person.MaxTargetHeartRate());
+    }
+}
