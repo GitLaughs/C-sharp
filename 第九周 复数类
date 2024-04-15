@@ -1,0 +1,60 @@
+using System;
+
+public class Complete
+{
+    public double Real { get; set; }
+    public double Image { get; set; }
+
+    // 无参数构造方法，默认属性值都为0
+    public Complete() : this(0, 0) { }
+
+    // 含有2个参数的构造方法
+    public Complete(double real, double image)
+    {
+        Real = real;
+        Image = image;
+    }
+
+    // 返回两个复数的和
+    public Complete Add(Complete x)
+    {
+        return new Complete(Real + x.Real, Image + x.Image);
+    }
+
+    // 返回两个复数的差
+    public Complete Sub(Complete x)
+    {
+        return new Complete(Real - x.Real, Image - x.Image);
+    }
+
+    // 重写ToString()方法
+    public override string ToString()
+    {
+        return Image >= 0 ? string.Format("{0}+{1}i", Real, Image) : string.Format("{0}{1}i", Real, Image);
+    }
+}
+
+class Program1
+{
+    static void Main()
+    {
+
+        string[] parts1 = Console.ReadLine().Split(' ');
+        double real1 = Convert.ToDouble(parts1[0]);
+        double image1 = Convert.ToDouble(parts1[1]);
+
+        string[] parts2 = Console.ReadLine().Split(' ');
+        double real2 = Convert.ToDouble(parts2[0]);
+        double image2 = Convert.ToDouble(parts2[1]);
+
+        // 创建复数对象
+        Complete num1 = new Complete(real1, image1);
+        Complete num2 = new Complete(real2, image2);
+
+        // 计算和输出复数的和和差
+        Complete sum = num1.Add(num2);
+        Complete difference = num1.Sub(num2);
+
+        Console.WriteLine(sum.ToString() + " " + difference.ToString());
+    }
+}
