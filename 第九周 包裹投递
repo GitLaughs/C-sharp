@@ -1,0 +1,79 @@
+ using System;
+
+abstract class Package
+{
+    protected string Name;
+    protected string Address;
+    protected int Weight;
+    protected double Mile;
+
+    public Package(string name, string address, int weight, double mile)
+    {
+        Name = name;
+        Address = address;
+        Weight = weight;
+        Mile = mile;
+    }
+
+    // 抽象方法计算运费
+    public abstract double CalculateFreight();
+}
+
+// ThreeDayPackage 类
+class ThreeDayPackage : Package
+{
+    public ThreeDayPackage(string name, string address, int weight, double mile)
+        : base(name, address, weight, mile)
+    {
+    }
+
+    public override double CalculateFreight()
+    {
+        return Weight * Mile * 0.01;
+    }
+}
+
+// OvernightPackage 类
+class OvernightPackage : ThreeDayPackage
+{
+    private double Fee; // 额外费用
+
+    public OvernightPackage(string name, string address, int weight, double mile, double fee)
+        : base(name, address, weight, mile)
+    {
+        Fee = fee;
+    }
+
+    public override double CalculateFreight()
+    {
+        return base.CalculateFreight() + Weight * Fee * 0.01;
+    }
+}
+
+class Iloveyou
+{
+    static void Main(string[] args)
+    {
+        // 读取输入并创建 ThreeDayPackage 对象
+        string[] threeDayInfo = Console.ReadLine().Split(' ');
+        ThreeDayPackage threeDayPackage = new ThreeDayPackage(
+            threeDayInfo[0],
+            threeDayInfo[1],
+            int.Parse(threeDayInfo[2]),
+            double.Parse(threeDayInfo[3])
+        );
+        // 读取输入并创建 OvernightPackage 对象
+        string[] overnightInfo = Console.ReadLine().Split(' ');
+        OvernightPackage overnightPackage = new OvernightPackage(
+            overnightInfo[0],
+            overnightInfo[1],
+            int.Parse(overnightInfo[2]),
+            double.Parse(overnightInfo[3]),
+            double.Parse(overnightInfo[4])
+        );
+
+        // 输出运费
+        Console.WriteLine("{0}", threeDayPackage.CalculateFreight());
+        Console.WriteLine("{0}", overnightPackage.CalculateFreight());
+    }
+}
