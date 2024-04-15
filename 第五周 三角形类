@@ -1,0 +1,39 @@
+ using System;
+
+public class Triangle
+{
+    public double SideA { get; private set; }
+    public double SideB { get; private set; }
+    public double SideC { get; private set; }
+
+    public Triangle(double sideA, double sideB, double sideC)
+    {
+        SideA = sideA > 0 ? sideA : 0;
+        SideB = sideB > 0 ? sideB : 0;
+        SideC = sideC > 0 ? sideC : 0;
+    }
+
+    public double CalculatePerimeter()
+    {
+        if (SideA == 0 || SideB == 0 || SideC == 0)
+        {
+            return 0;
+        }
+        return SideA + SideB + SideC;
+    }
+}
+
+class Program1
+{
+    static void Main(string[] args)
+    {
+        double sideA = Convert.ToDouble(Console.ReadLine());
+        double sideB = Convert.ToDouble(Console.ReadLine());
+        double sideC = Convert.ToDouble(Console.ReadLine());
+
+        Triangle triangle = new Triangle(sideA, sideB, sideC);
+        double perimeter = triangle.CalculatePerimeter();
+
+        Console.WriteLine("{0}", perimeter);
+    }
+}
