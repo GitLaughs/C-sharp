@@ -1,0 +1,55 @@
+
+using System;
+
+public class SavingsAccount
+{
+    public static double annualInterestRate = 0.04; 
+    private double savingBalance;
+
+    public SavingsAccount(double balance)
+    {
+        savingBalance = balance;
+    }
+
+    public void CalculateMonthlyInterest()
+    {
+        double monthlyInterest = savingBalance * annualInterestRate / 12;
+        savingBalance += monthlyInterest;
+    }
+
+    public static void ModifyInterestRate(double newAnnualInterestRate)
+    {
+        annualInterestRate = newAnnualInterestRate;
+    }
+
+    public void Show()
+    {
+        Console.WriteLine("SavingBalance:{0:F2}", savingBalance);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        string[] inputs = Console.ReadLine().Split(' ');
+        double balance1 = Convert.ToDouble(inputs[0]);
+        double balance2 = Convert.ToDouble(inputs[1]);
+
+        SavingsAccount saver1 = new SavingsAccount(balance1);
+        SavingsAccount saver2 = new SavingsAccount(balance2);
+
+        saver1.CalculateMonthlyInterest();
+        saver2.CalculateMonthlyInterest();
+        saver1.Show();
+        saver2.Show();
+
+        SavingsAccount.ModifyInterestRate(0.05);
+
+        saver1.CalculateMonthlyInterest();
+        saver2.CalculateMonthlyInterest();
+        saver1.Show();
+        saver2.Show();
+    }
+}
+ 
