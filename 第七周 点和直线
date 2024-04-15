@@ -1,0 +1,86 @@
+
+
+using System;
+
+// 定义点（Point）类
+public class Point
+{
+    // 自实现属性X、Y
+    public double X { get; set; }
+    public double Y { get; set; }
+
+    // 无参数的构造方法，默认属性值都为0
+    public Point()
+    {
+        X = 0;
+        Y = 0;
+    }
+
+    // 含有2个参数的构造方法，给属性赋值
+    public Point(double x, double y)
+    {
+        X = x;
+        Y = y;
+    }
+}
+
+// 定义直线（Line）类
+public class Line
+{
+    // Point类的数据成员p1、p2
+    public Point P1 { get; set; }
+    public Point P2 { get; set; }
+
+    // 无参数的构造方法，p1、p2为Point的默认值
+    public Line()
+    {
+        P1 = new Point();
+        P2 = new Point();
+    }
+
+    // 含有4个参数（double数据）的构造方法
+    public Line(double x1, double y1, double x2, double y2)
+    {
+        P1 = new Point(x1, y1);
+        P2 = new Point(x2, y2);
+    }
+
+    // 含有2个Point类型参数的构造方法
+    public Line(Point p1, Point p2)
+    {
+        P1 = p1;
+        P2 = p2;
+    }
+
+    // 返回两点之间的距离
+    public double Distance()
+    {
+        return Math.Sqrt(Math.Pow(P1.X - P2.X, 2) + Math.Pow(P1.Y - P2.Y, 2));
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // 使用无参的构造方法
+        Line line1 = new Line();
+        Console.WriteLine("{0:F2}", line1.Distance());
+
+        // 使用带4个参数的构造方法，参数从控制台输入
+        string[] tokens = Console.ReadLine().Split();
+        double x1 = double.Parse(tokens[0]);
+        double y1 = double.Parse(tokens[1]);
+        double x2 = double.Parse(tokens[2]);
+        double y2 = double.Parse(tokens[3]);
+        Line line2 = new Line(x1, y1, x2, y2);
+        Console.WriteLine("{0:F2}", line2.Distance());
+
+        // 使用带2个参数（Point类型）的构造方法
+        Point point1 = new Point(3, 4);
+        Point point2 = new Point(5, 6);
+        Line line3 = new Line(point1, point2);
+        Console.WriteLine("{0:F2}", line3.Distance());
+    }
+}
+ 
