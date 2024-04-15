@@ -1,0 +1,21 @@
+ using System;
+using System.Linq;
+
+class Program1
+{
+    static void Main(string[] args)
+    {
+        string[] input = Console.ReadLine().Split();
+        int[] numbers = input.Select(int.Parse).Distinct().Where(n => n >= 10 && n <= 100).ToArray();
+
+        if (numbers.Length > 0)
+        {
+            Console.WriteLine(string.Join(" ", numbers));
+            Console.WriteLine("{0}", numbers.Average());
+        }
+        else
+        {
+            Console.WriteLine("ERROR");
+        }
+    }
+}
