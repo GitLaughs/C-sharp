@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace 作业2
+{
+    internal class Program
+    {
+        class Time
+        {
+            int hour;
+            int minutes;
+            int seconds;
+            public int Hour
+            {
+                get { return hour; }
+                set
+                {
+                    if (value >= 0 && value <= 24) hour = value;
+                    else hour = 0;
+                }
+            }
+            public int Minutes
+            {
+                get { return minutes; }
+                set
+                {
+                    if (value >= 0 && value <= 59) minutes = value;
+                    else minutes = 0;
+                }
+            }
+            public int Second
+            {
+                get { return seconds; }
+                set
+                {
+                    if (value>= 0 && value <= 59) seconds = value;
+                    else seconds = 0;
+                }
+            }
+        }
+    static void Show(Time time)
+        {
+            Console.WriteLine("00时00分00秒");
+            Console.WriteLine("{0:D2}时{1:D2}分{2:D2}秒",time.Hour,time.Minutes,time.Second);
+        }
+    private static void Main(string[] args)
+        {
+            string a = Console.ReadLine();
+            string[] b = a.Split(' ');
+            Time time = new Time();
+            time.Hour = int.Parse(b[0]);
+            time.Minutes = int.Parse(b[1]);
+            time.Second = int.Parse(b[2]);
+            Show(time);
+
+        }
+    
+    }
+
+}
