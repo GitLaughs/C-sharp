@@ -1,0 +1,19 @@
+ using System;
+
+class Program1 {
+    static void Main(string[] args) {
+        // 从控制台读取两个整数
+        string[] inputs = Console.ReadLine().Split(' ');
+        int a = int.Parse(inputs[0]);
+        int b = int.Parse(inputs[1]);
+
+        // 计算和、差、积、商
+        int sum = a + b;
+        int difference = a - b;
+        int product = a * b;
+        int quotient = a / b; // 这里使用了整数除法
+
+        // 输出结果
+        Console.WriteLine("{0} {1} {2} {3}",sum,difference,product,quotient);
+    }
+}
