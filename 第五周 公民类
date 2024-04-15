@@ -1,0 +1,36 @@
+ using System;
+
+public class Citizen
+{
+    public string Id;
+    public string Name;
+    public string Gender;
+    public string FamilyAddress;
+
+    public Citizen(string id, string name, string gender, string familyAddress)
+    {
+        Id = id;
+        Name = name;
+        Gender = gender;
+        FamilyAddress = familyAddress;
+    }
+
+    public void Print()
+    {
+        string birthYear = Id.Substring(6, 4);
+        string birthMonth = Id.Substring(10, 2);
+        string birthDay = Id.Substring(12, 2);
+
+        Console.WriteLine("{0},{1},出生于{2}年{3}月{4}日,居住于{5}", Name, Gender, birthYear, birthMonth, birthDay, FamilyAddress);
+    }
+}
+
+class Program1
+{
+    static void Main(string[] args)
+    {
+        string[] inputs = Console.ReadLine().Split(' ');
+        Citizen citizen = new Citizen(inputs[0], inputs[1], inputs[2], inputs[3]);
+        citizen.Print();
+    }
+}
