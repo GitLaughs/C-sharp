@@ -1,0 +1,93 @@
+using System;
+
+// 抽象类Pet
+public abstract class Pet
+{
+    public string Name { get; set; }
+    public int Weight { get; set; }
+
+    // 构造方法
+    protected Pet(string name, int weight)
+    {
+        Name = name;
+        Weight = weight;
+    }
+
+    // 抽象方法Speak
+    public abstract void Speak();
+
+    // 抽象方法Eat
+    public abstract void Eat();
+
+    // 重写ToString方法
+    public override string ToString()
+    {
+        return Name + Weight + "斤";
+    }
+}
+
+// Cat类继承自Pet
+public class Cat : Pet
+{
+    public Cat(string name, int weight) : base(name, weight) { }
+
+    // 重写Speak方法
+    public override void Speak()
+    {
+        Console.WriteLine("MIAOMIAO");
+    }
+
+    // 重写Eat方法
+    public override void Eat()
+    {
+        Weight += 1;
+    }
+}
+
+// Dog类继承自Pet
+public class Dog : Pet
+{
+    public Dog(string name, int weight) : base(name, weight) { }
+
+    // 重写Speak方法
+    public override void Speak()
+    {
+        Console.WriteLine("WANGWANG");
+    }
+
+    // 重写Eat方法
+    public override void Eat()
+    {
+        Weight += 2;
+    }
+}
+
+// iloveyou类
+public class iloveyou
+{
+    // fun方法
+    public static void fun(Pet p)
+    {
+        p.Eat();
+        p.Speak();
+        Console.WriteLine(p);
+    }
+
+    // 主方法
+    public static void Main(string[] args)
+    {
+        // 读取输入两行
+        string catInfo = Console.ReadLine();
+        string dogInfo = Console.ReadLine();
+        string[] catData = catInfo.Split(' ');
+        string[] dogData = dogInfo.Split(' ');
+
+        // 创建Cat和Dog对象
+        Cat cat = new Cat(catData[0], int.Parse(catData[1]));
+        Dog dog = new Dog(dogData[0], int.Parse(dogData[1]));
+
+        // 调用fun方法
+        fun(cat);
+        fun(dog);
+    }
+}
