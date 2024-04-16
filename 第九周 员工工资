@@ -1,0 +1,88 @@
+using System;
+using System.Globalization;
+
+// 抽象基类Employee
+public abstract class Employee
+{
+    public string Name { get; private set; }
+    public string Number { get; private set; }
+    public DateTime Birthday { get; private set; }
+
+    protected Employee(string name, string number, DateTime birthday)
+    {
+        Name = name;
+        Number = number;
+        Birthday = birthday;
+    }
+
+    // 抽象方法Earning
+    public abstract decimal Earning();
+}
+
+// SalariedEmployee类
+public class SalariedEmployee : Employee
+{
+    public decimal MonthlySalary { get; private set; }
+
+    public SalariedEmployee(string name, string number, DateTime birthday, decimal monthlySalary)
+        : base(name, number, birthday)
+    {
+        MonthlySalary = monthlySalary;
+    }
+
+    // 重写Earning方法
+    public override decimal Earning()
+    {
+        return MonthlySalary + (DateTime.Now.Month == Birthday.Month ? 300 : 0);
+    }
+}
+
+// HourlyEmployee类
+public class HourlyEmployee : Employee
+{
+    public decimal DailyWage { get; private set; }
+    public int WorkDays { get; private set; }
+
+    public HourlyEmployee(string name, string number, DateTime birthday, decimal dailyWage, int workDays)
+        : base(name, number, birthday)
+    {
+        DailyWage = dailyWage;
+        WorkDays = workDays;
+    }
+
+    // 重写Earning方法
+    public override decimal Earning()
+    {
+        decimal basePay = WorkDays <= 22 ? DailyWage * WorkDays : 22 * DailyWage + (WorkDays - 22) * DailyWage * 1.5M;
+        return basePay + (DateTime.Now.Month == Birthday.Month ? 300 : 0);
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        // 输入固定工信息
+        string[] salariedInfo = Console.ReadLine().Split(' ');
+        SalariedEmployee salariedEmployee = new SalariedEmployee(
+            salariedInfo[0],
+            salariedInfo[1],
+            DateTime.ParseExact(salariedInfo[2], "yyyy-M-dd", CultureInfo.InvariantCulture),
+            decimal.Parse(salariedInfo[3])//你用MM会报错，因为一位数输入不是03，你交编译器看不懂
+        );
+
+        // 输入计时工信息
+        string[] hourlyInfo = Console.ReadLine().Split(' ');
+        HourlyEmployee hourlyEmployee = new HourlyEmployee(
+            hourlyInfo[0],
+            hourlyInfo[1],
+            DateTime.ParseExact(hourlyInfo[2], "yyyy-M-dd", CultureInfo.InvariantCulture),
+            decimal.Parse(hourlyInfo[3]),
+            int.Parse(hourlyInfo[4])//你用MM会报错，因为一位数输入不是03，你交编译器看不懂
+        );
+
+        // 输出工资
+        Console.WriteLine(salariedEmployee.Earning());
+        Console.WriteLine(hourlyEmployee.Earning());
+    }
+}
