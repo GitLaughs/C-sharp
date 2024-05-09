@@ -1,0 +1,39 @@
+using System;
+
+class DivisionProgram1
+{
+    static void Main()
+    {
+        while (true)
+        {
+            try
+            {
+                string[] inputs = Console.ReadLine().Split();
+                int num1 = int.Parse(inputs[0]);
+                int num2 = int.Parse(inputs[1]);
+
+                if (num2 == 0)
+                {
+                    throw new DivideByZeroException();
+                }
+
+                int result = num1 / num2;
+                Console.WriteLine("{0}", result);
+                break;
+            }
+            catch (DivideByZeroException)
+            {
+                Console.WriteLine("除数不能为0，请重新输入两个整数。");
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("输入数据格式不正确，请重新输入两个整数。");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("发生异常：{0}", ex.Message);
+                break;
+            }
+        }
+    }
+}
